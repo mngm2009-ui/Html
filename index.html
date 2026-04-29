@@ -33,7 +33,7 @@
 <div class="container">
     <div class="header-section">
         <h1>🔥 حاسبة المارد (201 - 450)</h1>
-        <div class="credit">تم البرمجه خاص لسيرفر 92 مع الحب ❤️</div>
+        <div class="credit">تم البرمجة خصيصاً لسيرفر 92 مع الحب ❤️</div>
     </div>
 
     <div class="input-card">
@@ -68,7 +68,7 @@
 
         <div class="res-line" style="flex-direction: column; align-items: flex-start;">
             <div style="display: flex; justify-content: space-between; width: 100%;">
-                <span>تكلفة الحفر (الترقية):</span>
+                <span>تكلفة التطوير الإجمالية:</span>
                 <span id="orangeOnly" style="color: #ff8c00 !important;">0</span>
             </div>
             <div id="hufraLog" class="hufra-list" style="display:none;"></div>
@@ -87,74 +87,99 @@
     </div>
 </div>
 
-<div class="footer-signature">برمجه وتنفيذ الشيخ اعدام 92</div>
+<div class="footer-signature">برمجة وتنفيذ الشيخ اعدام 92</div>
 
 <script>
     function calculate() {
-        let current = parseInt(document.getElementById('currentLvl').value);
-        let target = parseInt(document.getElementById('targetLvl').value);
-        let disc = parseFloat(document.getElementById('discount').value) || 0;
+        const current = parseInt(document.getElementById('currentLvl').value);
+        const target = parseInt(document.getElementById('targetLvl').value);
+        const disc = parseFloat(document.getElementById('discount').value) || 0;
 
-        // التحقق من النطاق المطلوب
         if (isNaN(current) || isNaN(target) || current < 201 || target > 450 || current >= target) {
             alert("يرجى إدخال مستويات صحيحة ضمن النطاق (201 - 450)");
             return;
         }
 
-        let totalLvlCost = 0;
-        let totalOrangeCost = 0;
-        let hufraFound = [];
-        
-        const orangeData = {
+        // بيانات اللهب الأسود (اللفل بلفله) حسب بياناتك
+        const blackData = {
+            201:480, 202:530, 203:580, 204:630, 205:680, 206:730, 207:780, 208:830, 209:880, 210:930,
+            211:560, 212:610, 213:660, 214:710, 215:760, 216:810, 217:860, 218:910, 219:960, 220:1010,
+            221:640, 222:690, 223:740, 224:790, 225:840, 226:890, 227:940, 228:990, 229:1040, 230:1090,
+            231:720, 232:770, 233:820, 234:870, 235:920, 236:970, 237:1020, 238:1070, 239:1120, 240:1170,
+            241:800, 242:850, 243:900, 244:950, 245:1000, 246:1050, 247:1100, 248:1150, 249:1200, 250:1250,
+            251:600, 252:660, 253:720, 254:780, 255:840, 256:900, 257:960, 258:1020, 259:1080, 260:1140,
+            261:650, 262:710, 263:770, 264:830, 265:890, 266:950, 267:1010, 268:1070, 269:1130, 270:1190,
+            271:700, 272:760, 273:820, 274:880, 275:940, 276:1000, 277:1060, 278:1120, 279:1180, 280:1240,
+            281:750, 282:810, 283:870, 284:930, 285:990, 286:1050, 287:1110, 288:1170, 289:1230, 290:1290,
+            291:800, 292:860, 293:920, 294:980, 295:1040, 296:1100, 297:1160, 298:1220, 299:1280, 300:1340,
+            301:800, 302:860, 303:920, 304:980, 305:1040, 306:1100, 307:1160, 308:1220, 309:1280, 310:1340,
+            311:650, 312:710, 313:770, 314:830, 315:890, 316:950, 317:1010, 318:1070, 319:1130, 320:1190,
+            321:700, 322:760, 323:820, 324:880, 325:940, 326:1100, 327:1160, 328:1220, 329:1280, 330:1340,
+            331:750, 332:810, 333:870, 334:930, 335:990, 336:1050, 337:1110, 338:1170, 339:1230, 340:1290,
+            341:800, 342:860, 343:920, 344:980, 345:1040, 346:1100, 347:1160, 348:1220, 349:1280, 350:1340,
+            351:800, 352:860, 353:920, 354:980, 355:1040, 356:1100, 357:1160, 358:1220, 359:1280, 360:1340,
+            361:800, 362:860, 363:920, 364:980, 365:1040, 366:1100, 367:1160, 368:1220, 369:1280, 370:1340,
+            371:800, 372:860, 373:920, 374:980, 375:1040, 376:1100, 377:1160, 378:1220, 379:1280, 380:1340,
+            381:800, 382:860, 383:920, 384:980, 385:1040, 386:1100, 387:1160, 388:1220, 389:1280, 390:1340,
+            391:800, 392:860, 393:920, 394:980, 395:1040, 396:1100, 397:1160, 398:1220, 399:1280, 400:1340,
+            401:1390, 402:1530, 403:1670, 404:1810, 405:1950, 406:2090, 407:2230, 408:2370, 409:2510, 410:2650,
+            411:1670, 412:1830, 413:1990, 414:2150, 415:2310, 416:2470, 417:2630, 418:2790, 419:2950, 420:3110,
+            421:1830, 422:1990, 423:2150, 424:2310, 425:2470, 426:2630, 427:2790, 428:2950, 429:3110, 430:3270,
+            431:1670, 432:1830, 433:1990, 434:2150, 435:2310, 436:2470, 437:2630, 438:2790, 439:2950, 440:3110,
+            441:1670, 442:1830, 443:1990, 444:2150, 445:2310, 446:2470, 447:2630, 448:2790, 449:2950, 450:3110
+        };
+
+        // بيانات اللهب البرتقالي (التطوير) حسب بياناتك
+        const upgradeData = {
             210: 7000, 220: 7000, 230: 7400, 240: 7700, 250: 12000,
-            260: 8000, 270: 8000, 280: 8000, 290: 9300, 300: 14400,
-            310: 10000, 320: 8000, 330: 8000, 340: 9300, 350: 13400,
+            260: 8000, 270: 8000, 280: 8000, 290: 9300, 300: 12000,
+            310: 10000, 320: 9000, 330: 8000, 340: 9300, 350: 14400,
             360: 10000, 370: 9000, 380: 9300, 390: 9700, 400: 16000,
             410: 14000, 420: 16000, 430: 19000, 440: 22000, 450: 20000
         };
 
-        function getBlackCost(lvl) {
-            if (lvl >= 201 && lvl <= 210) return 480 + (lvl-201)*50;
-            if (lvl >= 211 && lvl <= 220) return 560 + (lvl-211)*50;
-            if (lvl >= 221 && lvl <= 230) return 640 + (lvl-221)*50;
-            if (lvl >= 231 && lvl <= 240) return 720 + (lvl-231)*50;
-            if (lvl >= 241 && lvl <= 250) return 800 + (lvl-241)*50;
-            return 800 + (Math.floor(lvl/10)*20); 
-        }
+        let totalLvlCost = 0;
+        let totalUpgradeCost = 0;
+        let upgradeLog = [];
 
         for (let i = current + 1; i <= target; i++) {
-            totalLvlCost += getBlackCost(i);
-            if (orangeData[i]) {
-                totalOrangeCost += orangeData[i];
-                hufraFound.push("حفرة لفل " + i + " (" + orangeData[i].toLocaleString() + ")");
+            // إضافة التكلفة العادية
+            if (blackData[i]) {
+                totalLvlCost += blackData[i];
+            }
+            // إضافة تكلفة التطوير إذا وجد
+            if (upgradeData[i]) {
+                totalUpgradeCost += upgradeData[i];
+                upgradeLog.push("تطوير مستوى " + i + " (" + upgradeData[i].toLocaleString() + ")");
             }
         }
 
-        let combined = totalLvlCost + totalOrangeCost;
-        let discVal = combined * (disc/100);
-        let final = combined - discVal;
+        const combined = totalLvlCost + totalUpgradeCost;
+        const discAmount = combined * (disc / 100);
+        const finalTotal = combined - discAmount;
 
+        // تحديث النتائج في الشاشة
         document.getElementById('result-box').style.display = "block";
-        document.getElementById('rangeText').innerText = "(من لفل " + (current + 1) + " إلى لفل " + target + ")";
+        document.getElementById('rangeText').innerText = "(من " + (current + 1) + " إلى " + target + ")";
         document.getElementById('lvlOnly').innerText = totalLvlCost.toLocaleString();
-        document.getElementById('orangeOnly').innerText = totalOrangeCost.toLocaleString();
-        
-        const hufraDiv = document.getElementById('hufraLog');
-        if (hufraFound.length > 0) {
-            hufraDiv.style.display = "block";
-            hufraDiv.innerHTML = "<strong>تفاصيل الحفر المشمولة:</strong><br>" + hufraFound.join("<br>");
+        document.getElementById('orangeOnly').innerText = totalUpgradeCost.toLocaleString();
+
+        const logDiv = document.getElementById('hufraLog');
+        if (upgradeLog.length > 0) {
+            logDiv.style.display = "block";
+            logDiv.innerHTML = "<strong>تفاصيل التطوير:</strong><br>" + upgradeLog.join("<br>");
         } else {
-            hufraDiv.style.display = "none";
+            logDiv.style.display = "none";
         }
 
-        if(disc > 0) {
+        if (disc > 0) {
             document.getElementById('discLine').style.display = "flex";
-            document.getElementById('discAmount').innerText = "-" + Math.floor(discVal).toLocaleString();
+            document.getElementById('discAmount').innerText = "-" + Math.floor(discAmount).toLocaleString();
         } else {
             document.getElementById('discLine').style.display = "none";
         }
 
-        document.getElementById('totalRes').innerText = Math.floor(final).toLocaleString();
+        document.getElementById('totalRes').innerText = Math.floor(finalTotal).toLocaleString();
     }
 </script>
 
