@@ -3,50 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة المارد (201-450) - سيرفر 92</title>
+    <title>حاسبة المارد الرسمية - سيرفر 92</title>
     <style>
-        :root { --gold: #ffd700; --accent: #2ebcbe; --bg: #121212; --card-bg: #1e1e1e; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); color: #e0e0e0; padding: 15px; min-height: 100vh; display: flex; justify-content: center; align-items: center; margin: 0; position: relative; }
+        :root { --gold: #ffd700; --bg: #121212; --card-bg: #1e1e1e; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); color: #e0e0e0; padding: 15px; min-height: 100vh; display: flex; justify-content: center; align-items: center; margin: 0; }
         .container { width: 100%; max-width: 450px; background: var(--card-bg); padding: 25px; border-radius: 20px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center; }
-        .header-section { margin-bottom: 20px; }
-        h1 { color: var(--gold); text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-bottom: 8px; font-size: 1.6rem; }
-        .credit { font-size: 0.8rem; color: #bbb; font-style: italic; }
+        h1 { color: var(--gold); margin-bottom: 20px; font-size: 1.6rem; }
         .input-card { background: #252525; padding: 20px; border-radius: 15px; margin-bottom: 20px; border: 1px solid #333; }
         .input-group { margin-bottom: 15px; text-align: right; }
         label { display: block; font-weight: bold; margin-bottom: 8px; color: var(--gold); font-size: 0.9rem; }
-        input, select { width: 100%; padding: 12px; border-radius: 8px; background: #333; color: white; border: 1px solid #555; text-align: center; font-size: 1rem; box-sizing: border-box; cursor: pointer; }
-        input:focus, select:focus { outline: none; border-color: var(--gold); }
-        .btn { width: 100%; background: var(--gold); color: #000; padding: 15px; border: none; border-radius: 12px; font-weight: bold; font-size: 1.2rem; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
-        .btn:hover { transform: scale(1.02); background: #ffcc00; }
+        input, select { width: 100%; padding: 12px; border-radius: 8px; background: #333; color: white; border: 1px solid #555; text-align: center; font-size: 1rem; box-sizing: border-box; }
+        .btn { width: 100%; background: var(--gold); color: #000; padding: 15px; border: none; border-radius: 12px; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: 0.2s; }
+        .btn:hover { transform: scale(1.02); }
         .results { margin-top: 15px; padding: 20px; background: #000; border-radius: 15px; display: none; border-right: 6px solid var(--gold); text-align: right; }
-        .res-line { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.95rem; border-bottom: 1px solid #222; padding-bottom: 5px; align-items: center; }
-        .res-line span:last-child { color: #fff; font-weight: bold; text-align: left; }
-        .hufra-list { font-size: 0.75rem; color: #ffa500; background: #1a1500; padding: 8px; border-radius: 5px; margin-top: 5px; display: block; line-height: 1.4; border: 1px solid #443300; }
-        .final-line { margin-top: 15px; text-align: center; background: #1a1a1a; padding: 10px; border-radius: 8px; }
-        .success-text { color: #32cd32; font-weight: bold; display: block; margin-bottom: 10px; text-align: center; font-size: 1.1rem; }
-        .total-val { color: var(--gold); font-size: 1.8rem; font-weight: bold; }
-        .footer-signature { position: fixed; bottom: 10px; left: 15px; font-size: 0.65rem; color: #444; direction: ltr; }
+        .res-line { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.95rem; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        .hufra-list { font-size: 0.75rem; color: #ffa500; background: #1a1500; padding: 8px; border-radius: 5px; margin-top: 5px; line-height: 1.4; border: 1px solid #443300; }
+        .total-val { color: var(--gold); font-size: 1.8rem; font-weight: bold; margin-top: 10px; display: block; text-align: center; }
+        .footer { margin-top: 20px; font-size: 0.7rem; color: #555; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header-section">
-        <h1>🔥 حاسبة المارد (201 - 450)</h1>
-        <div class="credit">تم البرمجة خصيصاً لسيرفر 92 مع الحب ❤️</div>
-    </div>
+    <h1>🔥 حاسبة المارد (201 - 450)</h1>
 
     <div class="input-card">
         <div class="input-group">
             <label>المستوى الحالي:</label>
-            <input type="number" id="currentLvl" placeholder="مثلاً: 201" min="201" max="449">
+            <input type="number" id="currentLvl" placeholder="من 201">
         </div>
         <div class="input-group">
             <label>المستوى المطلوب:</label>
-            <input type="number" id="targetLvl" placeholder="مثلاً: 450" min="202" max="450">
+            <input type="number" id="targetLvl" placeholder="إلى 450">
         </div>
         <div class="input-group">
-            <label>اختر نسبة الخصم:</label>
+            <label>نسبة الخصم:</label>
             <select id="discount">
                 <option value="0">بدون خصم (0%)</option>
                 <option value="10">خصم 10%</option>
@@ -56,51 +47,44 @@
         </div>
     </div>
 
-    <button class="btn" onclick="calculate()">تحليل التكاليف 💰</button>
+    <button class="btn" onclick="calculate()">احسب التكلفة</button>
 
     <div id="result-box" class="results">
-        <span class="success-text">تم الحساب بنجاح ✅</span>
-        
         <div class="res-line">
-            <span>تكلفة اللفلات <br><small id="rangeText" style="color:#888; font-size:0.7rem;"></small>:</span>
+            <span>تكلفة اللفلات العادية:</span>
             <span id="lvlOnly">0</span>
         </div>
-
         <div class="res-line" style="flex-direction: column; align-items: flex-start;">
             <div style="display: flex; justify-content: space-between; width: 100%;">
-                <span>تكلفة التطوير الإجمالية:</span>
-                <span id="orangeOnly" style="color: #ff8c00 !important;">0</span>
+                <span>تكلفة الحفر:</span>
+                <span id="hufraOnly">0</span>
             </div>
-            <div id="hufraLog" class="hufra-list" style="display:none;"></div>
+            <div id="hufraLog" class="hufra-list"></div>
         </div>
-
-        <div class="res-line" id="discLine" style="display:none;">
-            <span>قيمة الخصم المستقطع:</span>
-            <span id="discAmount" style="color: #ff4500 !important;">0</span>
+        <div class="res-line" id="discLine">
+            <span>الخصم:</span>
+            <span id="discAmount">0</span>
         </div>
-
-        <div class="final-line">
-            <div style="color: #aaa; font-size: 0.8rem; margin-bottom: 5px;">المجموع النهائي المطلوب:</div>
-            <div class="total-val" id="totalRes">0</div>
-            <div style="color: var(--gold); font-size: 0.7rem;">لهب جمرة المارد</div>
+        <div style="text-align: center; margin-top: 15px;">
+            <span style="color: #aaa; font-size: 0.8rem;">المجموع النهائي:</span>
+            <span class="total-val" id="totalRes">0</span>
         </div>
     </div>
+    
+    <div class="footer">برمجة وتنفيذ الشيخ اعدام 92</div>
 </div>
-
-<div class="footer-signature">برمجة وتنفيذ الشيخ اعدام 92</div>
 
 <script>
     function calculate() {
         const current = parseInt(document.getElementById('currentLvl').value);
         const target = parseInt(document.getElementById('targetLvl').value);
-        const disc = parseFloat(document.getElementById('discount').value) || 0;
+        const disc = parseFloat(document.getElementById('discount').value);
 
         if (isNaN(current) || isNaN(target) || current < 201 || target > 450 || current >= target) {
-            alert("يرجى إدخال مستويات صحيحة ضمن النطاق (201 - 450)");
+            alert("يرجى إدخال مستويات صحيحة (201-450)");
             return;
         }
 
-        // بيانات اللهب الأسود (اللفل بلفله) حسب بياناتك
         const blackData = {
             201:480, 202:530, 203:580, 204:630, 205:680, 206:730, 207:780, 208:830, 209:880, 210:930,
             211:560, 212:610, 213:660, 214:710, 215:760, 216:810, 217:860, 218:910, 219:960, 220:1010,
@@ -114,14 +98,14 @@
             291:800, 292:860, 293:920, 294:980, 295:1040, 296:1100, 297:1160, 298:1220, 299:1280, 300:1340,
             301:800, 302:860, 303:920, 304:980, 305:1040, 306:1100, 307:1160, 308:1220, 309:1280, 310:1340,
             311:650, 312:710, 313:770, 314:830, 315:890, 316:950, 317:1010, 318:1070, 319:1130, 320:1190,
-            321:700, 322:760, 323:820, 324:880, 325:940, 326:1100, 327:1160, 328:1220, 329:1280, 330:1340,
+            321:700, 322:760, 323:820, 324:880, 325:940, 326:1000, 327:1060, 328:1120, 329:1180, 330:1240,
             331:750, 332:810, 333:870, 334:930, 335:990, 336:1050, 337:1110, 338:1170, 339:1230, 340:1290,
             341:800, 342:860, 343:920, 344:980, 345:1040, 346:1100, 347:1160, 348:1220, 349:1280, 350:1340,
             351:800, 352:860, 353:920, 354:980, 355:1040, 356:1100, 357:1160, 358:1220, 359:1280, 360:1340,
             361:800, 362:860, 363:920, 364:980, 365:1040, 366:1100, 367:1160, 368:1220, 369:1280, 370:1340,
             371:800, 372:860, 373:920, 374:980, 375:1040, 376:1100, 377:1160, 378:1220, 379:1280, 380:1340,
-            381:800, 382:860, 383:920, 384:980, 385:1040, 386:1100, 387:1160, 388:1220, 389:1280, 390:1340,
-            391:800, 392:860, 393:920, 394:980, 395:1040, 396:1100, 397:1160, 398:1220, 399:1280, 400:1340,
+            381:1080, 382:1180, 383:1280, 384:1380, 385:1480, 386:1580, 387:1680, 388:1780, 389:1880, 390:1980,
+            391:1160, 392:1280, 393:1400, 394:1520, 395:1640, 396:1760, 397:1880, 398:2000, 399:2120, 400:2240,
             401:1390, 402:1530, 403:1670, 404:1810, 405:1950, 406:2090, 407:2230, 408:2370, 409:2510, 410:2650,
             411:1670, 412:1830, 413:1990, 414:2150, 415:2310, 416:2470, 417:2630, 418:2790, 419:2950, 420:3110,
             421:1830, 422:1990, 423:2150, 424:2310, 425:2470, 426:2630, 427:2790, 428:2950, 429:3110, 430:3270,
@@ -129,59 +113,44 @@
             441:1670, 442:1830, 443:1990, 444:2150, 445:2310, 446:2470, 447:2630, 448:2790, 449:2950, 450:3110
         };
 
-        // بيانات اللهب البرتقالي (التطوير) حسب بياناتك
-        const upgradeData = {
+        const hufraData = {
             210: 7000, 220: 7000, 230: 7400, 240: 7700, 250: 12000,
-            260: 8000, 270: 8000, 280: 8000, 290: 9300, 300: 12000,
-            310: 10000, 320: 9000, 330: 8000, 340: 9300, 350: 14400,
-            360: 10000, 370: 9000, 380: 9300, 390: 9700, 400: 16000,
-            410: 14000, 420: 16000, 430: 19000, 440: 22000, 450: 20000
+            260: 8000, 270: 8000, 280: 8000, 290: 9300, 300: 14400,
+            310: 10000, 320: 8000, 330: 8000, 340: 9300, 350: 16000,
+            360: 10000, 370: 9000, 380: 11000, 390: 12000, 400: 16000,
+            410: 14000, 420: 16000, 430: 19000, 440: 22000
         };
 
-        let totalLvlCost = 0;
-        let totalUpgradeCost = 0;
-        let upgradeLog = [];
+        let totalBlack = 0;
+        let totalHufra = 0;
+        let logs = [];
 
         for (let i = current + 1; i <= target; i++) {
-            // إضافة التكلفة العادية
-            if (blackData[i]) {
-                totalLvlCost += blackData[i];
-            }
-            // إضافة تكلفة التطوير إذا وجد
-            if (upgradeData[i]) {
-                totalUpgradeCost += upgradeData[i];
-                upgradeLog.push("تطوير مستوى " + i + " (" + upgradeData[i].toLocaleString() + ")");
+            if (blackData[i]) totalBlack += blackData[i];
+            if (hufraData[i]) {
+                totalHufra += hufraData[i];
+                logs.push("حفرة لفل " + i + " (" + hufraData[i].toLocaleString() + ")");
             }
         }
 
-        const combined = totalLvlCost + totalUpgradeCost;
-        const discAmount = combined * (disc / 100);
-        const finalTotal = combined - discAmount;
+        const combined = totalBlack + totalHufra;
+        const discVal = combined * (disc / 100);
+        const final = combined - discVal;
 
-        // تحديث النتائج في الشاشة
         document.getElementById('result-box').style.display = "block";
-        document.getElementById('rangeText').innerText = "(من " + (current + 1) + " إلى " + target + ")";
-        document.getElementById('lvlOnly').innerText = totalLvlCost.toLocaleString();
-        document.getElementById('orangeOnly').innerText = totalUpgradeCost.toLocaleString();
-
-        const logDiv = document.getElementById('hufraLog');
-        if (upgradeLog.length > 0) {
-            logDiv.style.display = "block";
-            logDiv.innerHTML = "<strong>تفاصيل التطوير:</strong><br>" + upgradeLog.join("<br>");
+        document.getElementById('lvlOnly').innerText = totalBlack.toLocaleString();
+        document.getElementById('hufraOnly').innerText = totalHufra.toLocaleString();
+        document.getElementById('discAmount').innerText = "-" + Math.floor(discVal).toLocaleString();
+        document.getElementById('totalRes').innerText = Math.floor(final).toLocaleString();
+        
+        const logBox = document.getElementById('hufraLog');
+        if (logs.length > 0) {
+            logBox.style.display = "block";
+            logBox.innerHTML = "<strong>الحفر المشمولة:</strong><br>" + logs.join("<br>");
         } else {
-            logDiv.style.display = "none";
+            logBox.style.display = "none";
         }
-
-        if (disc > 0) {
-            document.getElementById('discLine').style.display = "flex";
-            document.getElementById('discAmount').innerText = "-" + Math.floor(discAmount).toLocaleString();
-        } else {
-            document.getElementById('discLine').style.display = "none";
-        }
-
-        document.getElementById('totalRes').innerText = Math.floor(finalTotal).toLocaleString();
     }
 </script>
-
 </body>
 </html>
